@@ -8,7 +8,7 @@ interface ProductFromAPI {
   images: { secure_url: string }[];
   // Assuming your API might have other fields you might want to preserve,
   // like description, category etc. if you ever use them.
-  [key: string]: any; // Allows for other properties from the API
+    [key: string]: unknown;  // Allows for other properties from the API
 }
 
 // Define the structure of the product data we want to *return* to the frontend

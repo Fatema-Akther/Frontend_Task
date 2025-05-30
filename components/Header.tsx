@@ -1,7 +1,7 @@
 // components/Header.tsx
 import Link from 'next/link';
 import { ShoppingBag, Menu, Search, X } from 'lucide-react';
-import { useState } from 'react';
+
 import Sidebar from './Sidebar';
 
 // Add new props to Header component
@@ -55,7 +55,8 @@ export default function Header({
         {/* Center Logo */}
         <div className="flex flex-col items-center mx-2 sm:mx-4">
           <Link href="/" className="text-xl sm:text-2xl font-bold text-gray-800 hover:text-pink-600 transition-colors">
-            <span className="text-pink-500">G'</span>LORE
+          <span className="text-pink-500">G&apos;</span>LORE
+
           </Link>
           <p className="text-[10px] sm:text-xs text-gray-500 mt-[-2px] tracking-wider">
             CLOTHES THAT SMILE
