@@ -8,7 +8,10 @@ import ShoppingCartSidebar from '@/components/ShoppingCartSidebar';
 import { fetchProductsForDisplay, ProcessedProduct } from '@/lib/api';
 
 // Corrected import path based on our previous discussion about Option B for types
-import { CartItem, CartProduct } from '@/app/types/types';
+//import { CartItem, CartProduct } from '@/app/types/types';
+import { CartItem, CartProduct } from './types/types';
+
+
 
 export default function HomePage() {
   const [products, setProducts] = useState<ProcessedProduct[]>([]);
