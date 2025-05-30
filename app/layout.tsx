@@ -26,6 +26,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
+
+              -                         cz-shortcut-listen="true" 
+              -                         cz-shortcut-listen="true"
+              -                         cz-shortcut-listen="true"
+
       </body>
     </html>
   );

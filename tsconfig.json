@@ -1,6 +1,7 @@
+// Frontend_task/frontend-task/tsconfig.json
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -19,9 +20,10 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
-    }
+      "@/*": ["./*"] // Ensure this line is present
+    },
+    "baseUrl": "." // Ensure this line is present
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"], // These should be directly under the root object
+  "exclude": ["node_modules"] // This should also be directly under the root object
 }
