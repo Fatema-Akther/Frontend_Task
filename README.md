@@ -12,6 +12,7 @@ This is a modern frontend web application built with **Next.js 15**, and **Tailw
 
 ### 📁 Project Structure
 
+
 ├── app/ # Main application routes and layout
 ├── components/ # Reusable React components
 ├── public/ # Static assets
@@ -19,6 +20,7 @@ This is a modern frontend web application built with **Next.js 15**, and **Tailw
 ├── tailwind.config.js # Tailwind CSS configuration
 ├── tsconfig.json # TypeScript configuration
 └── next.config.ts # Next.js configuration
+
 
 
 
@@ -32,10 +34,10 @@ npm install
 npm run dev
 
 
+```
 
+### 🌐 Live Demo
 
-### [🌐 Live Demo](https://frontend-task-9i7i-git-main-fatema-s-projects-2f51146a.vercel.app/)
-
-
-
+You can check out the live version of this project here:  
+[🌐 Live Demo](https://frontend-task-9i7i-git-main-fatema-s-projects-2f51146a.vercel.app/)
 
