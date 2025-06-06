@@ -115,7 +115,7 @@ export default function HomePage() {
 
           <div className="relative h-full w-full max-w-[500px] md:max-w-[600px] lg:max-w-[700px] xl:max-w-[800px] flex-shrink-0 flex items-center justify-end">
             <Image
-              src="/images/model-banner.PNG"
+              src="/images/model-banner.png"
               alt="New Collection Model"
               width={700}
               height={800}
