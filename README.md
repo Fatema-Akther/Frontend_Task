@@ -34,7 +34,7 @@ npm run dev
 
 
 
-### [🌐 Live Demo]([https://frontend-task-fatema.vercel.app](https://frontend-task-9i7i-git-main-fatema-s-projects-2f51146a.vercel.app/)
+### [🌐 Live Demo](https://frontend-task-9i7i-git-main-fatema-s-projects-2f51146a.vercel.app/)
 
 
 
