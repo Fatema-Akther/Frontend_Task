@@ -1,6 +1,6 @@
 ## 📝 Project Description
 
-This is a modern frontend web application built with **Next.js 15**, and **Tailwind CSS**. It is designed as part of a frontend development task, focusing on clean UI design, responsive layout, and component-based architecture.
+This is a modern frontend web application built with **Next.js 15**,**React 19,** and **Tailwind CSS**. It is designed as part of a frontend development task, focusing on clean UI design, responsive layout, and component-based architecture.
 
 ### ✨ Key Features
 - ⚛️ Built with Next.js 15 and React 19
