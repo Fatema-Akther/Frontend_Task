@@ -7,22 +7,19 @@ import Header from '@/components/Header';
 import ShoppingCartSidebar from '@/components/ShoppingCartSidebar';
 import { fetchProductsForDisplay, ProcessedProduct } from '@/lib/api';
 
-// Corrected import path based on our previous discussion about Option B for types
-//import { CartItem, CartProduct } from '@/app/types/types';
 import { CartItem, CartProduct } from './types/types';
+import Footer from '@/components/Footer';
 
 
 
 export default function HomePage() {
   const [products, setProducts] = useState<ProcessedProduct[]>([]);
-  const [loading, setLoading] = useState(true); // Corrected syntax
+  const [loading, setLoading] = useState(true);
 
-  // States for header functionality
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
   const [isCartSidebarOpen, setIsCartSidebarOpen] = useState(false);
 
-  // State for cart items
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   useEffect(() => {
@@ -36,9 +33,7 @@ export default function HomePage() {
     getProducts();
   }, []);
 
-  // Function to add item to cart
   const handleAddToCart = (productToAdd: ProcessedProduct) => {
-    // Map ProcessedProduct to CartProduct (for cart item base)
     const cartProductData: CartProduct = {
       _id: productToAdd._id,
       name: productToAdd.name,
@@ -47,42 +42,39 @@ export default function HomePage() {
     };
 
     setCartItems((prevItems) => {
-      const existingItem = prevItems.find((item) => item._id === cartProductData._id); // Use _id
+      const existingItem = prevItems.find((item) => item._id === cartProductData._id);
       if (existingItem) {
         return prevItems.map((item) =>
           item._id === cartProductData._id ? { ...item, quantity: item.quantity + 1 } : item
         );
       } else {
-        return [...prevItems, { ...cartProductData, quantity: 1 }]; // Ensure it matches CartItem structure
+        return [...prevItems, { ...cartProductData, quantity: 1 }];
       }
     });
     setIsCartSidebarOpen(true);
   };
 
-  // Function to change quantity in cart
   const handleQuantityChange = (itemId: string, newQuantity: number) => {
     setCartItems((prevItems) => {
       if (newQuantity <= 0) {
-        return prevItems.filter((item) => item._id !== itemId); // Use _id
+        return prevItems.filter((item) => item._id !== itemId);
       }
       return prevItems.map((item) =>
-        item._id === itemId ? { ...item, quantity: newQuantity } : item // Use _id
+        item._id === itemId ? { ...item, quantity: newQuantity } : item
       );
     });
   };
 
-  // Function to remove item from cart
   const handleRemoveItem = (itemId: string) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item._id !== itemId)); // Use _id
+    setCartItems((prevItems) => prevItems.filter((item) => item._id !== itemId));
   };
 
-  // Function to clear all items from cart
   const handleClearAll = () => {
     setCartItems([]);
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen l">
       <Header
         isSidebarOpen={isSidebarOpen}
         toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -92,26 +84,34 @@ export default function HomePage() {
         toggleCartSidebar={() => setIsCartSidebarOpen(!isCartSidebarOpen)}
       />
 
-      <main className="pt-16 bg-[#FFD5DF]">
+      <main className=" pt-1 bg-[#FFD5DF]  ">
+        
         {/* ... Hero Section ... */}
-        <section className="relative w-full max-w-7xl mx-auto h-[450px] bg-[#FFF2F5] flex items-center justify-center overflow-hidden rounded-xl">
-          <div className="relative z-20 text-left pl-6 md:pl-16 lg:pl-24 max-w-lg flex-shrink-0">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4 leading-tight">
-              নতুন <br /> কালেকশন
-            </h2>
-            <p className="text-gray-700 text-base md:text-lg lg:text-xl mb-8 leading-relaxed">
-              <span className="text-pink-500 text-xl font-bold align-middle mr-1">
-                &#10022;
-              </span> GloreBD - এর সাথে ফ্যাশনে পা রাখুন নতুন ডিজাইনে। <span className="text-pink-500">&#10084;</span>
-              <br />
-              আমাদের এক্সক্লুসিভ নতুন কালেকশন এখন উপলব্ধ!
-              <br />
-              আপনার প্রিয় ফ্যাশন স্টাইলে নিজেকে সাজান অনন্যভাবে। <span className="text-pink-500">&#10084;</span>
-            </p>
-            <button className="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-full text-lg shadow-lg transition duration-300 ease-in-out">
-              অর্ডার করুন
-            </button>
-          </div>
+<section className="relative w-full max-w-[85rem] mx-auto h-[770px] bg-[#FFF2F5] flex items-center justify-center overflow-hidden rounded-xl mb-20">
+<div className="relative z-20 text-center pl-6 md:pl-16 lg:pl-24 max-w-lg flex-shrink-0">
+  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4 leading-tight">
+    নতুন <br />
+    
+    <span className="text-pink-500"> কালেকশন</span>
+  </h2>
+
+  <div className="text-gray-700 text-sm md:text-base lg:text-lg mb-8 leading-relaxed space-y-2 whitespace-pre-line">
+    <p>
+      <span className="text-pink-500">&#10022;</span> <span className="text-pink-500"> GloreBD</span>-এর সাথে ফ্যাশনে পা রাখুন নতুন দিঙ্গেই!
+      <span className="text-pink-500 ml-1">&#10084;</span>
+    </p>
+    <p>আমাদের এক্সক্লুসিভ নতুন কালেকশন এখন উপলব্ধ!</p>
+    <p>
+      আপনার প্রিয় ফ্যাশন স্টাইলে নিজেকে সাজান অনন্যভাবে
+      <span className="text-pink-500 ml-1">&#10084;</span>
+    </p>
+  </div>
+
+  <button className="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-full text-lg shadow-lg transition duration-300 ease-in-out">
+    অর্ডার করুন
+  </button>
+</div>
+
 
           <div className="relative h-full w-full max-w-[500px] md:max-w-[600px] lg:max-w-[700px] xl:max-w-[800px] flex-shrink-0 flex items-center justify-end">
             <Image
@@ -124,6 +124,7 @@ export default function HomePage() {
             />
           </div>
         </section>
+   
 
         {/* Products Section */}
         <section className="min-h-screen p-6 bg-[#FFEBF0]">
@@ -139,14 +140,14 @@ export default function HomePage() {
             </p>
           </section>
 
-          <h1 className="text-3xl font-bold mb-6 text-left text-gray-800">Women Clothing</h1>
+          <h1 className="text-2xl font-bold mb-2 text-mostleft text-gray-800">Women Clothing</h1>
 
           {loading ? (
             <p className="text-center text-gray-600">Loading products...</p>
           ) : products.length === 0 ? (
             <p className="text-center text-gray-600">No products found. Please check API or sample data.</p>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8 max-w-8xl mx-auto">
               {products.map((product) => {
                 const discountPercentage =
                   (product.originalPrice > 0 && product.discountedPrice < product.originalPrice)
@@ -195,33 +196,19 @@ export default function HomePage() {
                         {product.name}
                       </h2>
 
-                      {/*
-                         OLD PRICE DISPLAY - Keeping for reference, but the new structure below
-                         will show the actual price next to the button.
-                      */}
                       <div className="flex flex-col items-start mb-4">
                         {product.originalPrice > product.discountedPrice ? (
                           <>
                             <span className="text-gray-500 line-through text-sm mb-1">
                               ৳ {product.originalPrice.toLocaleString("en-IN")}
                             </span>
-                            {/* <span className="text-xl font-bold text-pink-600">
-                              ৳ {product.discountedPrice.toLocaleString("en-IN")}
-                            </span> */}
                           </>
                         ) : (
-                          // <span className="text-xl font-bold text-gray-800">
-                          //   ৳ {product.originalPrice.toLocaleString("en-IN")}
-                          // </span>
-                          null // No need to show this price here if it's shown next to the button
+                          null
                         )}
                       </div>
 
-
-
-                      {/* NEW: Container for the button and price to place them side-by-side */}
-                      <div className="flex justify-between items-center mt-auto"> {/* Added mt-auto to push to bottom */}
-                        {/* Swapped order: Button first, then Price */}
+                      <div className="flex justify-between items-center mt-auto">
                         <button
                           onClick={() => handleAddToCart(product)}
                           className="bg-pink-500 text-white font-semibold py-2 px-4 rounded-md text-base hover:bg-pink-600 transition duration-300 ease-in-out shadow-md"
@@ -240,6 +227,98 @@ export default function HomePage() {
             </div>
           )}
         </section>
+
+        {/* NEWLY ADDED SECTION - MODIFIED FOR DEMO LOOK */}
+      {/* Products Section */}
+        <section className="min-screen p-10 bg-[#FFEBF0]">
+          {/* ... (আপনার প্রোডাক্ট সেকশনের কনটেন্ট) ... */}
+        </section>
+
+        {/* NEWLY ADDED SECTION - MODIFIED FOR DEMO LOOK AND GAP */}
+        <section className="bg-[#FFD5DF] py-8 mt-2">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+              {/* Column 1: Easy Exchange Policy */}
+              <div className="flex flex-col items-center p-6 "> {/* Adjusted shadow */}
+                <div className="mb-4">
+                  {/* SVG for Easy Exchange Policy - Wavy M from demo */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="48"
+                    height="48"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    //className="text-pink-500"
+                    className="text-black"
+
+                  >
+                    <path d="M4 21v-7a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v7" />
+                    <path d="M12 11h.01" />
+                    <path d="M12 14v.01" />
+                    <path d="M12 17v.01" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">Easy Exchange Policy</h3>
+                <p className="text-gray-700">We Offer hassle free exchange policy</p>
+              </div>
+
+              {/* Column 2: 3 Days Return Policy - Checkmark Badge from demo */}
+              <div className="flex flex-col items-center p-6 "> {/* Adjusted shadow */}
+                <div className="mb-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="48"
+                    height="48"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                   className="text-black"
+
+                  >
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                    <polyline points="22 4 12 14.01 9 11.01" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">3 Days Return Policy</h3>
+                <p className="text-gray-700">We provide 3 days free return policy</p>
+              </div>
+
+              {/* Column 3: Best customer support - Headset from demo */}
+              <div className="flex flex-col items-center p-6 "> {/* Adjusted shadow */}
+                <div className="mb-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="48"
+                    height="48"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                   className="text-black"
+
+                  >
+                    <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+                    <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z" />
+                    <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">Best customer support</h3>
+                <p className="text-gray-700">we provide 24/7 customer support</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
       </main>
 
       {/* Shopping Cart Sidebar */}
@@ -251,6 +330,8 @@ export default function HomePage() {
         onRemoveItem={handleRemoveItem}
         onClearAll={handleClearAll}
       />
+       <Footer />
     </div>
+    
   );
 }

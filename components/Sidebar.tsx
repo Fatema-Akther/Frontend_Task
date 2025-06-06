@@ -54,17 +54,17 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               {isWomenClothingOpen && (
                 <ul className="pl-4 mt-2 space-y-1"> {/* Indent sub-items */}
                   <li>
-                    <Link href="/categories/women-clothing/jamdhani-sharee" onClick={onClose} className="block text-gray-600 hover:text-pink-600 text-sm">
+                    <Link href="/Category" onClick={onClose} className="block text-gray-600 hover:text-pink-600 text-sm">
                       Jamdhani Sharee
                     </Link>
                   </li>
                   <li>
-                    <Link href="/categories/women-clothing/three-prics" onClick={onClose} className="block text-gray-600 hover:text-pink-600 text-sm">
+                    <Link href="/Category" onClick={onClose} className="block text-gray-600 hover:text-pink-600 text-sm">
                       Three Prios {/* Assuming 'Prics' is a typo for 'Prios' or similar */}
                     </Link>
                   </li>
                   <li>
-                    <Link href="/categories/women-clothing/unsticthed-party-dress" onClick={onClose} className="block text-gray-600 hover:text-pink-600 text-sm">
+                    <Link href="/Category" onClick={onClose} className="block text-gray-600 hover:text-pink-600 text-sm">
                       unstitched party dress
                     </Link>
                   </li>

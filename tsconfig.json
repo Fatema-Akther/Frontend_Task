@@ -1,4 +1,3 @@
-// Frontend_task/frontend-task/tsconfig.json
 {
   "compilerOptions": {
     "target": "es5",
@@ -9,7 +8,7 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "bundler", // Or "node" depending on your Next.js setup, "bundler" is common for newer Next.js
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -19,11 +18,13 @@
         "name": "next"
       }
     ],
+    // --- ENSURE THESE TWO LINES ARE CORRECT ---
+    "baseUrl": ".", // Important: resolves modules relative to the project root
     "paths": {
-      "@/*": ["./*"] // Ensure this line is present
-    },
-    "baseUrl": "." // Ensure this line is present
+      "@/*": ["./*"] // Important: maps @/ to the project root
+    }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"], // These should be directly under the root object
-  "exclude": ["node_modules"] // This should also be directly under the root object
+  // --- THESE MUST BE OUTSIDE compilerOptions ---
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }

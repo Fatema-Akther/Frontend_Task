@@ -18,6 +18,7 @@ export interface ProcessedProduct { // This is already exported, which is good
   images: { secure_url: string }[];
   originalPrice: number;
   discountedPrice: number;
+   category: string; // ✅ Added category
 }
 
 // *** IMPORTANT: ADD 'export' KEYWORD HERE ***
@@ -64,6 +65,7 @@ export async function fetchProductsForDisplay(): Promise<ProcessedProduct[]> {
 
     const processedProducts: ProcessedProduct[] = fetchedProducts.slice(0, sampleProductData.length).map((product, index) => {
       const sample = sampleProductData[index];
+       const category = typeof product.category === 'string' ? product.category : 'Uncategorized';
       if (!sample) {
         const apiPrice = parseFloat(product.price);
         return {
@@ -72,6 +74,7 @@ export async function fetchProductsForDisplay(): Promise<ProcessedProduct[]> {
           images: product.images,
           originalPrice: apiPrice,
           discountedPrice: apiPrice,
+               category,
         };
       }
       return {
@@ -80,6 +83,7 @@ export async function fetchProductsForDisplay(): Promise<ProcessedProduct[]> {
         images: product.images,
         originalPrice: sample.originalPrice,
         discountedPrice: sample.discountedPrice,
+            category,
       };
     });
 
