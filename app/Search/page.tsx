@@ -1,4 +1,5 @@
-'use client'; // ✅ Add this at the very top
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Header from '@/components/Header';
@@ -8,7 +9,7 @@ import Image from 'next/image';
 import { fetchProductsForDisplay, ProcessedProduct } from '@/lib/api';
 import { CartItem, CartProduct } from '../types/types';
 
-export default function CategoryPage() {
+export default function SearchContent() {
   const searchParams = useSearchParams();
   const category = searchParams.get('category');
 
@@ -60,7 +61,7 @@ export default function CategoryPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFD5DF]">
+    <>
       <Header
         isSidebarOpen={isSidebarOpen}
         toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -70,13 +71,12 @@ export default function CategoryPage() {
         toggleCartSidebar={() => setIsCartSidebarOpen(!isCartSidebarOpen)}
       />
 
-    <main className=" bg-[#FFD5DF]">
-  <section className="py-8 px-4 bg-[#FFEBF0] min-h-[60vh]">
-
+      <main className="bg-[#FFD5DF]">
+        <section className="py-8 px-4 bg-[#FFEBF0] min-h-[60vh]">
           {loading ? (
-             <p className="text-center text-gray-600 text-lg">লোড হচ্ছে...</p>
-) : filteredProducts.length > 0 ? (
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            <p className="text-center text-gray-600 text-lg">লোড হচ্ছে...</p>
+          ) : filteredProducts.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
               {filteredProducts.map(product => (
                 <div
                   key={product._id}
@@ -113,10 +113,8 @@ export default function CategoryPage() {
             </div>
           ) : (
             <div className="flex items-center justify-center min-h-[70vh]">
-    <p className="text-center text-gray-700  text-base">
-      কোনো প্রোডাক্ট পাওয়া যায়নি
-    </p>
-  </div>
+              <p className="text-center text-gray-700 text-base">কোনো প্রোডাক্ট পাওয়া যায়নি</p>
+            </div>
           )}
         </section>
       </main>
@@ -139,6 +137,6 @@ export default function CategoryPage() {
       />
 
       <Footer />
-    </div>
+    </>
   );
 }
