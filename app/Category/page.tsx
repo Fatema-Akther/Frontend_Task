@@ -1,6 +1,8 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+
 import { useSearchParams } from 'next/navigation';
+import React, { useEffect, useState, Suspense } from 'react';
+
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ShoppingCartSidebar from '@/components/ShoppingCartSidebar';
@@ -8,7 +10,7 @@ import Image from 'next/image';
 import { fetchProductsForDisplay, ProcessedProduct } from '@/lib/api';
 import { CartItem, CartProduct } from '../types/types';
 
-export default function CategoryPage() {
+function CategoryContent() {
   const searchParams = useSearchParams();
   const category = searchParams.get('category');
 
@@ -70,13 +72,12 @@ export default function CategoryPage() {
         toggleCartSidebar={() => setIsCartSidebarOpen(!isCartSidebarOpen)}
       />
 
-    <main className=" bg-[#FFD5DF]">
-  <section className="py-8 px-4 bg-[#FFEBF0] min-h-[60vh]">
-
+      <main className="bg-[#FFD5DF]">
+        <section className="py-8 px-4 bg-[#FFEBF0] min-h-[60vh]">
           {loading ? (
-             <p className="text-center text-gray-600 text-lg">লোড হচ্ছে...</p>
-) : filteredProducts.length > 0 ? (
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            <p className="text-center text-gray-600 text-lg">লোড হচ্ছে...</p>
+          ) : filteredProducts.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
               {filteredProducts.map(product => (
                 <div
                   key={product._id}
@@ -113,10 +114,10 @@ export default function CategoryPage() {
             </div>
           ) : (
             <div className="flex items-center justify-center min-h-[70vh]">
-    <p className="text-center text-gray-700  text-base">
-      কোনো প্রোডাক্ট পাওয়া যায়নি
-    </p>
-  </div>
+              <p className="text-center text-gray-700 text-base">
+                কোনো প্রোডাক্ট পাওয়া যায়নি
+              </p>
+            </div>
           )}
         </section>
       </main>
@@ -140,5 +141,14 @@ export default function CategoryPage() {
 
       <Footer />
     </div>
+  );
+}
+
+// 🔁 Actual page export with Suspense wrapper
+export default function CategoryPageWrapper() {
+  return (
+    <Suspense fallback={<div className="text-center mt-10">Loading category...</div>}>
+      <CategoryContent />
+    </Suspense>
   );
 }
