@@ -27,6 +27,8 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
 
+-                       suppresshydrationwarning="true"
+-                       data-qb-installed="true"
 
 
       </body>

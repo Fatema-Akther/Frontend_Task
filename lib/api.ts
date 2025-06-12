@@ -56,9 +56,11 @@ export async function fetchProductsForDisplay(): Promise<ProcessedProduct[]> {
 
     const processed = fetchedProducts.slice(0, sampleProductData.length).map((product, index) => {
       const sample = sampleProductData[index];
-      const category = typeof product.category === 'string'
-        ? product.category
-        : (product.category as any)?.name || 'Uncategorized';
+     type CategoryType = string | { name: string };
+
+const category = typeof product.category === 'string'
+  ? product.category
+  : (product.category as { name?: string })?.name || 'Uncategorized';
       const description = typeof product.description === 'string' ? product.description : '';
 
       return {
