@@ -1,95 +1,90 @@
 // lib/api.ts
-// This file will fetch actual product images but overlay sample data for names and prices.
 
 interface ProductFromAPI {
   _id: string;
-  name: string; // The original name from API (we'll override this with sample data)
-  price: string; // The original price from API (we'll override this with sample data)
+  name: string;
+  price: string;
   images: { secure_url: string }[];
-  // Assuming your API might have other fields you might want to preserve,
-  // like description, category etc. if you ever use them.
-    [key: string]: unknown;  // Allows for other properties from the API
+  category?: string | { name: string };
+  description?: string;
+  [key: string]: unknown;
 }
 
-// Define the structure of the product data we want to *return* to the frontend
-export interface ProcessedProduct { // This is already exported, which is good
+export interface ProcessedProduct {
   _id: string;
   name: string;
   images: { secure_url: string }[];
   originalPrice: number;
   discountedPrice: number;
-   category: string; // ✅ Added category
+  category: string;
+  description?: string;
 }
 
-// *** IMPORTANT: ADD 'export' KEYWORD HERE ***
+const sampleProductData = [
+  {
+    name: "unready made Indian Embroidery Party dress",
+    originalPrice: 2500,
+    discountedPrice: 2200,
+  },
+  {
+    name: "প্রিমিয়াম ইন্ডিয়ান জর্জেট পার্টি কালেকশন",
+    originalPrice: 2800,
+    discountedPrice: 2499,
+  },
+  {
+    name: "জর্জেট হাতের কাজ থ্রি পিস",
+    originalPrice: 1800,
+    discountedPrice: 1550,
+  },
+  {
+    name: "আর্টিফিশিয়াল লেদার পার্স",
+    originalPrice: 1200,
+    discountedPrice: 999,
+  },
+];
+
 export async function fetchProductsForDisplay(): Promise<ProcessedProduct[]> {
   try {
     const res = await fetch('https://glore-bd-backend-node-mongo.vercel.app/api/product');
     if (!res.ok) {
-      const errorText = await res.text();
-      console.error(`Failed to fetch products: ${res.status} ${res.statusText} - ${errorText}`);
-      return []; // Return empty array on fetch failure
-    }
-
-    const json = await res.json();
-
-    if (!Array.isArray(json.data)) {
-      console.error("API response data is not an array:", json.data);
+      console.error(`Fetch failed: ${res.statusText}`);
       return [];
     }
 
-    const fetchedProducts: ProductFromAPI[] = json.data;
+    const json = await res.json();
+    const fetchedProducts: ProductFromAPI[] = Array.isArray(json.data) ? json.data : [];
 
-    const sampleProductData = [
-      {
-        name: "unready made Indian Embroidery Party dress",
-        originalPrice: 2500,
-        discountedPrice: 2200,
-      },
-      {
-        name: "প্রিমিয়াম ইন্ডিয়ান জর্জেট পার্টি কালেকশন",
-        originalPrice: 2800,
-        discountedPrice: 2499,
-      },
-      {
-        name: "জর্জেট হাতের কাজ থ্রি পিস", // Example third product
-        originalPrice: 1800,
-        discountedPrice: 1550,
-      },
-      {
-        name: "আর্টিফিশিয়াল লেদার পার্স", // Example fourth product
-        originalPrice: 1200,
-        discountedPrice: 999,
-      },
-    ];
-
-    const processedProducts: ProcessedProduct[] = fetchedProducts.slice(0, sampleProductData.length).map((product, index) => {
+    const processed = fetchedProducts.slice(0, sampleProductData.length).map((product, index) => {
       const sample = sampleProductData[index];
-       const category = typeof product.category === 'string' ? product.category : 'Uncategorized';
-      if (!sample) {
-        const apiPrice = parseFloat(product.price);
-        return {
-          _id: product._id,
-          name: product.name,
-          images: product.images,
-          originalPrice: apiPrice,
-          discountedPrice: apiPrice,
-               category,
-        };
-      }
+      const category = typeof product.category === 'string'
+        ? product.category
+        : (product.category as any)?.name || 'Uncategorized';
+      const description = typeof product.description === 'string' ? product.description : '';
+
       return {
         _id: product._id,
-        name: sample.name,
+        name: sample?.name || product.name,
         images: product.images,
-        originalPrice: sample.originalPrice,
-        discountedPrice: sample.discountedPrice,
-            category,
+        originalPrice: sample?.originalPrice || parseFloat(product.price),
+        discountedPrice: sample?.discountedPrice || parseFloat(product.price),
+        category,
+        description,
       };
     });
 
-    return processedProducts;
+    return processed;
   } catch (error) {
-    console.error("Error fetching products for display:", error);
+    console.error("Error fetching products:", error);
     return [];
   }
+}
+
+export async function fetchProductById(id: string): Promise<ProcessedProduct | null> {
+  const products = await fetchProductsForDisplay();
+  const product = products.find((p) => p._id === id);
+  if (!product) {
+    console.error(`Product with ID ${id} not found`);
+    return null;
+  }
+  return product;
 }

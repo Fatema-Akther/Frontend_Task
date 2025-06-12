@@ -63,9 +63,9 @@ export default function Header({
         <div className="flex flex-col items-center mx-2 sm:mx-4">
           <Link
             href="/"
-            className="text-xl sm:text-2xl font-bold text-gray-800 hover:text-pink-600 transition-colors"
+            className="text-xl sm:text-2xl font-base text-gray-800 hover:text-pink-600 transition-colors"
           >
-            <span className="text-pink-500">G&apos;</span>LORE
+            <span className="text-pink-500">G&apos;LORE</span>
           </Link>
           <p className="text-[10px] sm:text-xs text-gray-500 mt-[-2px] tracking-wider">
             CLOTHES THAT SMILE

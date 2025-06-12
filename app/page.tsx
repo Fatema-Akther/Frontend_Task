@@ -6,11 +6,10 @@ import { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import ShoppingCartSidebar from '@/components/ShoppingCartSidebar';
 import { fetchProductsForDisplay, ProcessedProduct } from '@/lib/api';
+import Link from 'next/link'; // Import Link
 
 import { CartItem, CartProduct } from './types/types';
 import Footer from '@/components/Footer';
-
-
 
 export default function HomePage() {
   const [products, setProducts] = useState<ProcessedProduct[]>([]);
@@ -84,33 +83,32 @@ export default function HomePage() {
         toggleCartSidebar={() => setIsCartSidebarOpen(!isCartSidebarOpen)}
       />
 
-      <main className=" pt-1 bg-[#FFD5DF]  ">
-        
+      <main className=" pt-1 bg-[#FFD5DF] ">
         {/* ... Hero Section ... */}
-<section className="relative w-full max-w-[85rem] mx-auto h-[770px] bg-[#FFF2F5] flex items-center justify-center overflow-hidden rounded-xl mb-20">
-<div className="relative z-20 text-center pl-6 md:pl-16 lg:pl-24 max-w-lg flex-shrink-0">
-  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4 leading-tight">
-    নতুন <br />
-    
-    <span className="text-pink-500"> কালেকশন</span>
-  </h2>
+        <section className="relative w-full max-w-[85rem] mx-auto h-[770px] bg-[#FFF2F5] flex items-center justify-center overflow-hidden rounded-xl mb-20">
+          <div className="relative z-20 text-center pl-6 md:pl-16 lg:pl-24 max-w-lg flex-shrink-0">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4 leading-tight">
+              নতুন <br />
 
-  <div className="text-gray-700 text-sm md:text-base lg:text-lg mb-8 leading-relaxed space-y-2 whitespace-pre-line">
-    <p>
-      <span className="text-pink-500">&#10022;</span> <span className="text-pink-500"> GloreBD</span>-এর সাথে ফ্যাশনে পা রাখুন নতুন দিঙ্গেই!
-      <span className="text-pink-500 ml-1">&#10084;</span>
-    </p>
-    <p>আমাদের এক্সক্লুসিভ নতুন কালেকশন এখন উপলব্ধ!</p>
-    <p>
-      আপনার প্রিয় ফ্যাশন স্টাইলে নিজেকে সাজান অনন্যভাবে
-      <span className="text-pink-500 ml-1">&#10084;</span>
-    </p>
-  </div>
+              <span className="text-pink-500"> কালেকশন</span>
+            </h2>
 
-  <button className="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-full text-lg shadow-lg transition duration-300 ease-in-out">
-    অর্ডার করুন
-  </button>
-</div>
+            <div className="text-gray-700 text-sm md:text-base lg:text-lg mb-8 leading-relaxed space-y-2 whitespace-pre-line">
+              <p>
+                <span className="text-pink-500">&#10022;</span> <span className="text-pink-500"> GloreBD</span>-এর সাথে ফ্যাশনে পা রাখুন নতুন দিঙ্গেই!
+                <span className="text-pink-500 ml-1">&#10084;</span>
+              </p>
+              <p>আমাদের এক্সক্লুসিভ নতুন কালেকশন এখন উপলব্ধ!</p>
+              <p>
+                আপনার প্রিয় ফ্যাশন স্টাইলে নিজেকে সাজান অনন্যভাবে
+                <span className="text-pink-500 ml-1">&#10084;</span>
+              </p>
+            </div>
+
+            <button className="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-full text-lg shadow-lg transition duration-300 ease-in-out">
+              অর্ডার করুন
+            </button>
+          </div>
 
 
           <div className="relative h-full w-full max-w-[500px] md:max-w-[600px] lg:max-w-[700px] xl:max-w-[800px] flex-shrink-0 flex items-center justify-end">
@@ -124,112 +122,90 @@ export default function HomePage() {
             />
           </div>
         </section>
-   
+
 
         {/* Products Section */}
-        <section className="min-h-screen p-6 bg-[#FFEBF0]">
-          <section className="w-full max-w-7xl mx-auto py-12 text-center mt-8">
-            <h4 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4 tracking-tight">
-              LATEST COLLECTIONS <span className="inline-block h-1.5 w-28 bg-gray-400 align-middle ml-3"></span>
-            </h4>
-            <p className="text-pink-500 text-2xl font-bold mb-3">
-              ✨ নতুন স্টাইল এখন ট্রেন্ড! ✨
-            </p>
-            <p className="text-gray-700 text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto">
-              ট্রেন্ডি পোশাকের সাথে থাকুন সবসময়, এক ধাপ এগিয়ে আপনার ফ্যাশন, আপনার পরিব্র <span className="text-pink-500 font-bold">GloreBD</span> এর সাথে! 💖
-            </p>
-          </section>
+<section className="min-h-screen p-6 bg-[#FFEBF0]">
+  <section className="w-full max-w-7xl mx-auto py-12 text-center mt-8">
+    <h4 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4 tracking-tight">
+      LATEST COLLECTIONS <span className="inline-block h-1.5 w-28 bg-gray-400 align-middle ml-3"></span>
+    </h4>
+    <p className="text-pink-500 text-2xl font-bold mb-3">✨ নতুন স্টাইল এখন ট্রেন্ড! ✨</p>
+    <p className="text-gray-700 text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto">
+      ট্রেন্ডি পোশাকের সাথে থাকুন সবসময়, এক ধাপ এগিয়ে আপনার ফ্যাশন, আপনার পরিব্র
+      <span className="text-pink-500 font-bold"> GloreBD</span> এর সাথে! 💖
+    </p>
+  </section>
 
-          <h1 className="text-2xl font-bold mb-2 text-mostleft text-gray-800">Women Clothing</h1>
+  <h1 className="text-2xl font-bold mb-2 text-mostleft text-gray-800">Women Clothing</h1>
 
-          {loading ? (
-            <p className="text-center text-gray-600">Loading products...</p>
-          ) : products.length === 0 ? (
-            <p className="text-center text-gray-600">No products found. Please check API or sample data.</p>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8 max-w-8xl mx-auto">
-              {products.map((product) => {
-                const discountPercentage =
-                  (product.originalPrice > 0 && product.discountedPrice < product.originalPrice)
-                    ? Math.round(((product.originalPrice - product.discountedPrice) / product.originalPrice) * 100)
-                    : 0;
+  {loading ? (
+    <p className="text-center text-gray-600">Loading products...</p>
+  ) : products.length === 0 ? (
+    <p className="text-center text-gray-600">No products found. Please check API or sample data.</p>
+  ) : (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8 max-w-8xl mx-auto">
+      {products.map((product) => {
+        const discountPercentage =
+          (product.originalPrice > 0 && product.discountedPrice < product.originalPrice)
+            ? Math.round(((product.originalPrice - product.discountedPrice) / product.originalPrice) * 100)
+            : 0;
 
-                return (
-                  <div
-                    key={product._id}
-                    className="relative bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden flex flex-col group"
-                  >
-                    <div className="relative w-full aspect-[3/4] bg-gray-100 rounded-t overflow-hidden">
-                      <Image
-                        src={product.images[0]?.secure_url || '/placeholder.png'}
-                        alt={product.name}
-                        fill
-                        className="object-cover rounded-t transition-transform duration-300 ease-in-out group-hover:scale-90"
-                      />
-                      {/* Top Left Icon */}
-                      <div className="absolute top-3 left-3 bg-gray-800 p-2 rounded-full z-10 shadow-md">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="text-white"
-                        >
-                          <path d="M12 2a3 3 0 0 0-3 3v.1a3 3 0 0 0-2.4 2.5 3 3 0 0 0-.4 3.7C5 13 6 15 6 15c0 2-2 6-2 6a2 2 0 0 0 2 2 2 2 0 0 0 2-2c0 0 2-4 2-6h.08C14 15 15 17 15 17a2 2 0 0 0 2 2 2 2 0 0 0 2-2c0 0 1-2 1-4.2a3 3 0 0 0-.4-3.7 3 3 0 0 0-2.4-2.5V5a3 3 0 0 0-3-3z" />
-                        </svg>
-                      </div>
+        return (
+          <Link href={`/products/${product._id}`} key={product._id}>
+            <div className="relative bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden flex flex-col group cursor-pointer">
+              <div className="relative w-full aspect-[3/4] bg-gray-100 rounded-t overflow-hidden">
+                <Image
+                  src={product.images[0]?.secure_url || '/placeholder.png'}
+                  alt={product.name}
+                  fill
+                  className="object-cover rounded-t transition-transform duration-300 ease-in-out group-hover:scale-90"
+                />
 
-                      {discountPercentage > 0 && (
-                        <div className="absolute top-3 right-3 bg-pink-500 text-white text-sm font-bold px-3 py-1 rounded-full z-10 shadow-md">
-                          Save: {discountPercentage}%
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="p-4 flex flex-col flex-grow">
-                      <h2 className="text-lg font-semibold text-gray-800 mb-2">
-                        {product.name}
-                      </h2>
-
-                      <div className="flex flex-col items-start mb-4">
-                        {product.originalPrice > product.discountedPrice ? (
-                          <>
-                            <span className="text-gray-500 line-through text-sm mb-1">
-                              ৳ {product.originalPrice.toLocaleString("en-IN")}
-                            </span>
-                          </>
-                        ) : (
-                          null
-                        )}
-                      </div>
-
-                      <div className="flex justify-between items-center mt-auto">
-                        <button
-                          onClick={() => handleAddToCart(product)}
-                          className="bg-pink-500 text-white font-semibold py-2 px-4 rounded-md text-base hover:bg-pink-600 transition duration-300 ease-in-out shadow-md"
-                        >
-                          অর্ডার করুন
-                        </button>
-                        <span className="text-xl font-bold text-pink-600">
-                          ৳ {(product.discountedPrice > 0 ? product.discountedPrice : product.originalPrice).toLocaleString("en-IN")}
-                        </span>
-                      </div>
-
-                    </div>
+               
+                {discountPercentage > 0 && (
+                  <div className="absolute top-3 right-3 bg-pink-500 text-white text-sm font-bold px-3 py-1 rounded-full z-10 shadow-md">
+                    Save: {discountPercentage}%
                   </div>
-                );
-              })}
+                )}
+              </div>
+
+              <div className="p-4 flex flex-col flex-grow">
+                <h2 className="text-lg font-semibold text-gray-800 mb-2">{product.name}</h2>
+
+                <div className="flex flex-col items-start mb-4">
+                  {product.originalPrice > product.discountedPrice && (
+                    <span className="text-gray-500 line-through text-sm mb-1">
+                      ৳ {product.originalPrice.toLocaleString("en-IN")}
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex justify-between items-center mt-auto">
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleAddToCart(product);
+                    }}
+                    className="bg-pink-500 text-white font-semibold py-2 px-4 rounded-md text-base hover:bg-pink-600 transition duration-300 ease-in-out shadow-md"
+                  >
+                    অর্ডার করুন
+                  </button>
+                  <span className="text-xl font-bold text-pink-600">
+                    ৳ {(product.discountedPrice > 0 ? product.discountedPrice : product.originalPrice).toLocaleString("en-IN")}
+                  </span>
+                </div>
+              </div>
             </div>
-          )}
-        </section>
+          </Link>
+        );
+      })}
+    </div>
+  )}
+</section>
 
         {/* NEWLY ADDED SECTION - MODIFIED FOR DEMO LOOK */}
-      {/* Products Section */}
+        {/* Products Section */}
         <section className="min-screen p-10 bg-[#FFEBF0]">
           {/* ... (আপনার প্রোডাক্ট সেকশনের কনটেন্ট) ... */}
         </section>
@@ -279,7 +255,7 @@ export default function HomePage() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                   className="text-black"
+                    className="text-black"
 
                   >
                     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
@@ -303,7 +279,7 @@ export default function HomePage() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                   className="text-black"
+                    className="text-black"
 
                   >
                     <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
@@ -330,8 +306,8 @@ export default function HomePage() {
         onRemoveItem={handleRemoveItem}
         onClearAll={handleClearAll}
       />
-       <Footer />
+      <Footer />
     </div>
-    
+
   );
 }
